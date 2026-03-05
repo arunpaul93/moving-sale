@@ -19,32 +19,9 @@
             color: white;
             padding: 2.5rem 1rem 1.5rem;
             text-align: center;
-            position: sticky;
-            top: 0;
-            z-index: 50;
             box-shadow: 0 4px 30px rgba(56, 189, 248, 0.15);
             border-bottom: 2px solid rgba(56, 189, 248, 0.3);
-            transition: padding 0.3s ease;
         }
-        .header.compact { padding: 0.6rem 1rem; }
-        .header h1,
-        .header p {
-            max-height: 60px;
-            overflow: hidden;
-            opacity: 1;
-            margin-top: 0.3rem;
-            transition: max-height 0.4s ease, opacity 0.3s ease, margin 0.4s ease;
-        }
-        .header.compact h1,
-        .header.compact p {
-            max-height: 0;
-            opacity: 0;
-            margin: 0;
-        }
-        .header .notice { transition: margin 0.4s ease; }
-        .header .highlight { transition: margin 0.4s ease; }
-        .header.compact .notice { margin-top: 0; }
-        .header.compact .highlight { margin-top: 0.4rem; }
         .header h1 {
             font-size: 2rem;
             font-weight: 900;
@@ -846,18 +823,6 @@
 
     document.querySelectorAll('.item, .category-title').forEach(el => observer.observe(el));
 
-    // Compact header on scroll with hysteresis to prevent flickering
-    const header = document.querySelector('.header');
-    let isCompact = false;
-    window.addEventListener('scroll', () => {
-        if (!isCompact && window.scrollY > 120) {
-            isCompact = true;
-            header.classList.add('compact');
-        } else if (isCompact && window.scrollY < 40) {
-            isCompact = false;
-            header.classList.remove('compact');
-        }
-    });
     </script>
 </body>
 </html>
