@@ -1,0 +1,829 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Moving Sale - Everything Must Go by March 23</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800;900&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: #1e1e2e;
+            color: #cdd6f4;
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+        .header {
+            background: linear-gradient(135deg, #1e293b, #0f172a);
+            color: white;
+            padding: 2.5rem 1rem 1.5rem;
+            text-align: center;
+            position: sticky;
+            top: 0;
+            z-index: 50;
+            box-shadow: 0 4px 30px rgba(56, 189, 248, 0.15);
+            border-bottom: 2px solid rgba(56, 189, 248, 0.3);
+        }
+        .header h1 {
+            font-size: 2rem;
+            font-weight: 900;
+            letter-spacing: -0.5px;
+            background: linear-gradient(135deg, #38bdf8, #818cf8);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        .header p { opacity: 0.8; font-size: 0.95rem; max-width: 600px; margin: 0.3rem auto; color: #94a3b8; }
+        .header .highlight {
+            background: linear-gradient(135deg, rgba(251, 191, 36, 0.15), rgba(245, 158, 11, 0.08));
+            backdrop-filter: blur(10px);
+            padding: 0.5rem 1.2rem;
+            border-radius: 50px;
+            display: inline-block;
+            margin-top: 0.8rem;
+            font-weight: 700;
+            font-size: 0.85rem;
+            border: 1px solid rgba(251, 191, 36, 0.35);
+            color: #fbbf24;
+        }
+        .notice {
+            margin: 1rem auto 0;
+            padding: 0.6rem 1.2rem;
+            background: linear-gradient(135deg, #0ea5e9, #38bdf8);
+            color: #0f172a;
+            font-size: 0.85rem;
+            font-weight: 700;
+            text-align: center;
+            border-radius: 50px;
+            display: block;
+            max-width: 700px;
+        }
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 1.5rem 1rem;
+        }
+        .category-title {
+            font-weight: 900;
+            margin: 2.5rem 0 1.2rem;
+            padding: 1rem 1.2rem;
+            border-radius: 14px;
+            color: #e2e8f0;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-size: 1.1rem;
+            text-align: center;
+            position: relative;
+        }
+        .cat-tech {
+            background: linear-gradient(135deg, rgba(56, 189, 248, 0.12), rgba(56, 189, 248, 0.03));
+            border: 1px solid rgba(56, 189, 248, 0.2);
+        }
+        .cat-tech::before { background: linear-gradient(90deg, #38bdf8, #0ea5e9) !important; }
+        .cat-office {
+            background: linear-gradient(135deg, rgba(251, 191, 36, 0.12), rgba(251, 191, 36, 0.03));
+            border: 1px solid rgba(251, 191, 36, 0.2);
+            color: #fbbf24;
+        }
+        .cat-office::before { background: linear-gradient(90deg, #fbbf24, #f59e0b) !important; }
+        .cat-appliances {
+            background: linear-gradient(135deg, rgba(52, 211, 153, 0.12), rgba(52, 211, 153, 0.03));
+            border: 1px solid rgba(52, 211, 153, 0.2);
+            color: #34d399;
+        }
+        .cat-appliances::before { background: linear-gradient(90deg, #34d399, #10b981) !important; }
+        .cat-kitchen {
+            background: linear-gradient(135deg, rgba(251, 113, 133, 0.12), rgba(251, 113, 133, 0.03));
+            border: 1px solid rgba(251, 113, 133, 0.2);
+            color: #fb7185;
+        }
+        .cat-kitchen::before { background: linear-gradient(90deg, #fb7185, #f43f5e) !important; }
+        .cat-bedroom {
+            background: linear-gradient(135deg, rgba(192, 132, 252, 0.12), rgba(192, 132, 252, 0.03));
+            border: 1px solid rgba(192, 132, 252, 0.2);
+            color: #c084fc;
+        }
+        .cat-bedroom::before { background: linear-gradient(90deg, #c084fc, #a855f7) !important; }
+        .cat-auto {
+            background: linear-gradient(135deg, rgba(249, 115, 22, 0.12), rgba(249, 115, 22, 0.03));
+            border: 1px solid rgba(249, 115, 22, 0.2);
+            color: #fb923c;
+        }
+        .cat-auto::before { background: linear-gradient(90deg, #fb923c, #f97316) !important; }
+        .category-title::before {
+            content: '';
+            display: block;
+            width: 40px;
+            height: 3px;
+            background: linear-gradient(90deg, #38bdf8, #0ea5e9);
+            border-radius: 3px;
+            margin: 0 auto 0.6rem;
+        }
+        .item {
+            background: rgba(255,255,255,0.04);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255,255,255,0.06);
+            border-radius: 16px;
+            padding: 2.2rem 1.5rem;
+            margin-bottom: 0.9rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 1rem;
+            transition: all 0.3s ease;
+        }
+        .item:hover {
+            background: rgba(56, 189, 248, 0.06);
+            border-color: rgba(56, 189, 248, 0.25);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 30px rgba(0,0,0,0.4), 0 0 15px rgba(56, 189, 248, 0.08);
+        }
+        .item-info { flex: 1; min-width: 0; }
+        .item-name {
+            font-weight: 600;
+            font-size: 1.05rem;
+            margin-bottom: 0.4rem;
+            color: #e2e8f0;
+        }
+        .item-name a {
+            color: #e2e8f0;
+            text-decoration: none;
+            transition: color 0.2s;
+        }
+        .item-name a:hover { color: #38bdf8; }
+        .item-meta {
+            font-size: 0.85rem;
+            color: #64748b;
+            margin-bottom: 0.3rem;
+        }
+        .view-product {
+            display: inline-block;
+            margin-top: 0.3rem;
+            font-size: 0.78rem;
+            color: #38bdf8;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.2s;
+        }
+        .view-product:hover { color: #7dd3fc; text-decoration: underline; }
+        .view-product svg {
+            width: 12px;
+            height: 12px;
+            vertical-align: middle;
+            margin-right: 3px;
+            fill: #38bdf8;
+        }
+        .item-right {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+            gap: 0.6rem;
+            flex-shrink: 0;
+        }
+        .item-price {
+            font-weight: 800;
+            font-size: 1.2rem;
+            color: #f1f5f9;
+        }
+        .item-price .label {
+            font-size: 0.6rem;
+            font-weight: 700;
+            color: #0f172a;
+            background: linear-gradient(135deg, #f59e0b, #f97316);
+            padding: 0.15rem 0.5rem;
+            border-radius: 50px;
+            display: inline-block;
+            margin-bottom: 0.15rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        .btn-offer {
+            background: linear-gradient(135deg, #25d366, #128c7e);
+            color: white;
+            border: none;
+            padding: 0.5rem 1.1rem;
+            border-radius: 50px;
+            font-size: 0.8rem;
+            font-weight: 700;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.4rem;
+            white-space: nowrap;
+            transition: all 0.3s;
+            box-shadow: 0 4px 15px rgba(37, 211, 102, 0.25);
+        }
+        .btn-offer:hover {
+            transform: scale(1.05);
+            box-shadow: 0 6px 20px rgba(37, 211, 102, 0.4);
+        }
+        .btn-offer svg { width: 16px; height: 16px; fill: white; }
+        .units-badge {
+            background: rgba(56, 189, 248, 0.1);
+            color: #38bdf8;
+            font-size: 0.7rem;
+            padding: 0.15rem 0.5rem;
+            border-radius: 50px;
+            font-weight: 600;
+            border: 1px solid rgba(56, 189, 248, 0.25);
+        }
+        .footer {
+            text-align: center;
+            padding: 2.5rem 1rem;
+            color: #475569;
+            font-size: 0.85rem;
+        }
+        .item.sold {
+            position: relative;
+            opacity: 0.35;
+            pointer-events: none;
+        }
+        .item.sold::after {
+            content: 'SOLD';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) rotate(-15deg);
+            font-size: 2.2rem;
+            font-weight: 900;
+            color: #ef4444;
+            background: rgba(15, 23, 42, 0.85);
+            padding: 0.2rem 1.5rem;
+            border: 4px solid #ef4444;
+            border-radius: 10px;
+            letter-spacing: 4px;
+            pointer-events: none;
+            z-index: 2;
+        }
+        .btn-sold-toggle {
+            background: transparent;
+            color: #ef4444;
+            border: 2px solid #ef4444;
+            padding: 0.35rem 0.8rem;
+            border-radius: 50px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            cursor: pointer;
+            white-space: nowrap;
+            transition: all 0.2s;
+        }
+        .btn-sold-toggle:hover { background: #ef4444; color: #fff; }
+        .item.sold .btn-sold-toggle {
+            background: #22c55e;
+            color: #fff;
+            border-color: #22c55e;
+        }
+        .item.sold .btn-sold-toggle:hover { background: #16a34a; border-color: #16a34a; }
+        .admin-bar {
+            display: none;
+            background: #0f172a;
+            color: #e2e8f0;
+            padding: 0.8rem 1.2rem;
+            text-align: center;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            font-size: 0.9rem;
+            border-bottom: 2px solid #ef4444;
+        }
+        .admin-bar.active { display: block; }
+        .admin-bar .admin-label {
+            background: #ef4444;
+            padding: 0.2rem 0.6rem;
+            border-radius: 50px;
+            font-weight: 700;
+            font-size: 0.7rem;
+            margin-right: 0.5rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: #fff;
+        }
+        .btn-copy-link {
+            background: linear-gradient(135deg, #0ea5e9, #38bdf8);
+            color: #0f172a;
+            border: none;
+            padding: 0.4rem 1rem;
+            border-radius: 50px;
+            font-size: 0.8rem;
+            font-weight: 700;
+            cursor: pointer;
+            margin-left: 0.8rem;
+            transition: all 0.2s;
+        }
+        .btn-copy-link:hover { transform: scale(1.05); }
+        .copy-toast {
+            display: none;
+            background: rgba(14, 165, 233, 0.95);
+            color: #fff;
+            padding: 0.8rem 1.5rem;
+            border-radius: 50px;
+            position: fixed;
+            bottom: 2rem;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 200;
+            font-size: 0.9rem;
+            font-weight: 600;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.4);
+        }
+        .item, .category-title {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.6s ease, transform 0.6s ease;
+        }
+        .item.visible, .category-title.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        .item.sold.visible { opacity: 0.35; }
+        @media (max-width: 600px) {
+            .item { flex-direction: column; align-items: flex-start; }
+            .item-right { flex-direction: row; align-items: center; width: 100%; justify-content: space-between; }
+            .header h1 { font-size: 1.5rem; }
+            .header { padding: 1.5rem 1rem 1rem; }
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>Moving Sale</h1>
+        <p>Prices shown are what I paid when purchased &mdash; make your best offer!</p>
+        <p>Most items are less than 5 months old, some still unopened.</p>
+        <div class="notice">
+            Give your best offer &mdash; <strong>all items must go before March 23!</strong> Tap <strong>"Make an Offer"</strong> to send your bid via WhatsApp.
+        </div>
+        <div class="highlight">Collection: March 18 &ndash; 23 &bull; Heidelberg West, Victoria</div>
+    </div>
+
+    <div class="container">
+
+        <div class="category-title cat-tech">Tech &amp; Electronics</div>
+
+        <div class="item">
+            <div class="item-info">
+                <div class="item-name">TCL 75" C6K 4K UHD QD-Mini LED Google TV [2025]</div>
+                <div class="item-meta">TV &bull; 75 inch &bull; 4K Mini LED &bull; Bought Dec 2025</div>
+                <a class="view-product" href="https://www.jbhifi.com.au/products/tcl-75-c6k-4k-uhd-qd-mini-led-google-tv-2025" target="_blank"><svg viewBox="0 0 24 24"><path d="M19 19H5V5h7V3H5a2 2 0 00-2 2v14a2 2 0 002 2h14a2 2 0 002-2v-7h-2v7zM14 3v2h3.59l-9.83 9.83 1.41 1.41L19 6.41V10h2V3h-7z"/></svg>See where it was purchased</a>
+            </div>
+            <div class="item-right">
+                <div class="item-price"><span class="label">I paid</span>$1,488</div>
+                <a class="btn-offer" href="https://wa.me/61483313425?text=Hi%2C%20I%27d%20like%20to%20make%20an%20offer%20for%20the%20*TCL%2075%22%20C6K%204K%20Mini%20LED%20TV*%20(listed%20at%20%241%2C488).%0AMy%20offer%3A%20%24" target="_blank">
+                    <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.625.846 5.059 2.284 7.034L.789 23.492a.5.5 0 00.612.638l4.695-1.27A11.94 11.94 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 22c-2.204 0-4.244-.7-5.912-1.892l-.348-.248-3.12.844.724-3.225-.258-.384A9.953 9.953 0 012 12C2 6.486 6.486 2 12 2s10 4.486 10 10-4.486 10-10 10z"/></svg>
+                    Make an Offer
+                </a>
+            </div>
+        </div>
+
+        <div class="item">
+            <div class="item-info">
+                <div class="item-name">Lenovo G32QC-30 32" QHD 165Hz Curved Gaming Monitor</div>
+                <div class="item-meta">Monitor &bull; 32 inch &bull; QHD 165Hz &bull; Bought Oct 2025 &bull; <span class="units-badge">2 available</span></div>
+                <a class="view-product" href="https://netplus.com.au/products/lenovo-g32qc-30-32-inch-qhd-165hz-curved-gaming-monitor" target="_blank"><svg viewBox="0 0 24 24"><path d="M19 19H5V5h7V3H5a2 2 0 00-2 2v14a2 2 0 002 2h14a2 2 0 002-2v-7h-2v7zM14 3v2h3.59l-9.83 9.83 1.41 1.41L19 6.41V10h2V3h-7z"/></svg>See where it was purchased</a>
+            </div>
+            <div class="item-right">
+                <div class="item-price"><span class="label">I paid (each)</span>$250</div>
+                <a class="btn-offer" href="https://wa.me/61483313425?text=Hi%2C%20I%27d%20like%20to%20make%20an%20offer%20for%20the%20*Lenovo%2032%22%20QHD%20165Hz%20Gaming%20Monitor*%20(listed%20at%20%24250%20each%2C%202%20available).%0AMy%20offer%3A%20%24" target="_blank">
+                    <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.625.846 5.059 2.284 7.034L.789 23.492a.5.5 0 00.612.638l4.695-1.27A11.94 11.94 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 22c-2.204 0-4.244-.7-5.912-1.892l-.348-.248-3.12.844.724-3.225-.258-.384A9.953 9.953 0 012 12C2 6.486 6.486 2 12 2s10 4.486 10 10-4.486 10-10 10z"/></svg>
+                    Make an Offer
+                </a>
+            </div>
+        </div>
+
+        <div class="item">
+            <div class="item-info">
+                <div class="item-name">Tapo TP-Link Smart Wi-Fi Socket Energy Monitoring (P110)</div>
+                <div class="item-meta">Smart Plug &bull; Energy Monitoring &bull; Bought Oct 2025</div>
+                <a class="view-product" href="https://www.amazon.com.au/dp/B0BNDW7N3S?ref=ppx_yo2ov_dt_b_fed_asin_title" target="_blank"><svg viewBox="0 0 24 24"><path d="M19 19H5V5h7V3H5a2 2 0 00-2 2v14a2 2 0 002 2h14a2 2 0 002-2v-7h-2v7zM14 3v2h3.59l-9.83 9.83 1.41 1.41L19 6.41V10h2V3h-7z"/></svg>See where it was purchased</a>
+            </div>
+            <div class="item-right">
+                <div class="item-price"><span class="label">I paid</span>$22</div>
+                <a class="btn-offer" href="https://wa.me/61483313425?text=Hi%2C%20I%27d%20like%20to%20make%20an%20offer%20for%20the%20*Tapo%20Smart%20Wi-Fi%20Socket%20P110*%20(listed%20at%20%2422).%0AMy%20offer%3A%20%24" target="_blank">
+                    <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.625.846 5.059 2.284 7.034L.789 23.492a.5.5 0 00.612.638l4.695-1.27A11.94 11.94 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 22c-2.204 0-4.244-.7-5.912-1.892l-.348-.248-3.12.844.724-3.225-.258-.384A9.953 9.953 0 012 12C2 6.486 6.486 2 12 2s10 4.486 10 10-4.486 10-10 10z"/></svg>
+                    Make an Offer
+                </a>
+            </div>
+        </div>
+
+        <div class="item">
+            <div class="item-info">
+                <div class="item-name">Blink Weather Resistant 4m Power Adaptor for Mini 2 / Mini 2K+ Black</div>
+                <div class="item-meta">Camera Accessory &bull; Power Adaptor &bull; Bought Oct 2025</div>
+                <a class="view-product" href="https://www.amazon.com.au/dp/B0D3RN5W37?ref=ppx_yo2ov_dt_b_fed_asin_title&th=1" target="_blank"><svg viewBox="0 0 24 24"><path d="M19 19H5V5h7V3H5a2 2 0 00-2 2v14a2 2 0 002 2h14a2 2 0 002-2v-7h-2v7zM14 3v2h3.59l-9.83 9.83 1.41 1.41L19 6.41V10h2V3h-7z"/></svg>See where it was purchased</a>
+            </div>
+            <div class="item-right">
+                <div class="item-price"><span class="label">I paid</span>$19</div>
+                <a class="btn-offer" href="https://wa.me/61483313425?text=Hi%2C%20I%27d%20like%20to%20make%20an%20offer%20for%20the%20*Blink%20Power%20Adaptor%204m*%20(listed%20at%20%2419).%0AMy%20offer%3A%20%24" target="_blank">
+                    <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.625.846 5.059 2.284 7.034L.789 23.492a.5.5 0 00.612.638l4.695-1.27A11.94 11.94 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 22c-2.204 0-4.244-.7-5.912-1.892l-.348-.248-3.12.844.724-3.225-.258-.384A9.953 9.953 0 012 12C2 6.486 6.486 2 12 2s10 4.486 10 10-4.486 10-10 10z"/></svg>
+                    Make an Offer
+                </a>
+            </div>
+        </div>
+
+        <div class="category-title cat-office">Office &amp; Desk</div>
+
+        <div class="item">
+            <div class="item-info">
+                <div class="item-name">Standing Desk</div>
+                <div class="item-meta">Standing Desk &bull; from Kogan &bull; Bought Oct 2025</div>
+                <a class="view-product" href="https://www.kogan.com/au/shop/category/home-garden-3804/standing-desks/" target="_blank"><svg viewBox="0 0 24 24"><path d="M19 19H5V5h7V3H5a2 2 0 00-2 2v14a2 2 0 002 2h14a2 2 0 002-2v-7h-2v7zM14 3v2h3.59l-9.83 9.83 1.41 1.41L19 6.41V10h2V3h-7z"/></svg>See where it was purchased</a>
+            </div>
+            <div class="item-right">
+                <div class="item-price"><span class="label">I paid</span>$171</div>
+                <a class="btn-offer" href="https://wa.me/61483313425?text=Hi%2C%20I%27d%20like%20to%20make%20an%20offer%20for%20the%20*Standing%20Desk*%20(listed%20at%20%24171).%0AMy%20offer%3A%20%24" target="_blank">
+                    <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.625.846 5.059 2.284 7.034L.789 23.492a.5.5 0 00.612.638l4.695-1.27A11.94 11.94 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 22c-2.204 0-4.244-.7-5.912-1.892l-.348-.248-3.12.844.724-3.225-.258-.384A9.953 9.953 0 012 12C2 6.486 6.486 2 12 2s10 4.486 10 10-4.486 10-10 10z"/></svg>
+                    Make an Offer
+                </a>
+            </div>
+        </div>
+
+        <div class="item">
+            <div class="item-info">
+                <div class="item-name">Alfordson Mesh Office Chair Racing Ergonomic Recliner All Black</div>
+                <div class="item-meta">Office Chair &bull; Mesh &bull; Black &bull; Bought Oct 2025</div>
+                <a class="view-product" href="https://www.kogan.com/au/buy/aussie-union-group-alfordson-mesh-office-chair-racing-ergonomic-executive-computer-recliner-work-all-black-kgv_a-och-mesh-da-albk/" target="_blank"><svg viewBox="0 0 24 24"><path d="M19 19H5V5h7V3H5a2 2 0 00-2 2v14a2 2 0 002 2h14a2 2 0 002-2v-7h-2v7zM14 3v2h3.59l-9.83 9.83 1.41 1.41L19 6.41V10h2V3h-7z"/></svg>See where it was purchased</a>
+            </div>
+            <div class="item-right">
+                <div class="item-price"><span class="label">I paid</span>$87</div>
+                <a class="btn-offer" href="https://wa.me/61483313425?text=Hi%2C%20I%27d%20like%20to%20make%20an%20offer%20for%20the%20*Alfordson%20Mesh%20Office%20Chair*%20(listed%20at%20%2487).%0AMy%20offer%3A%20%24" target="_blank">
+                    <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.625.846 5.059 2.284 7.034L.789 23.492a.5.5 0 00.612.638l4.695-1.27A11.94 11.94 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 22c-2.204 0-4.244-.7-5.912-1.892l-.348-.248-3.12.844.724-3.225-.258-.384A9.953 9.953 0 012 12C2 6.486 6.486 2 12 2s10 4.486 10 10-4.486 10-10 10z"/></svg>
+                    Make an Offer
+                </a>
+            </div>
+        </div>
+
+        <div class="item">
+            <div class="item-info">
+                <div class="item-name">Stelive Memory Foam Seat Cushion Butt Support Pillow Blue Grey</div>
+                <div class="item-meta">Seat Cushion &bull; Memory Foam &bull; Bought Oct 2025</div>
+                <a class="view-product" href="https://www.kogan.com/au/buy/topex-stelive-memory-foam-seat-cushion-butt-support-pillow-coccyx-cushion-for-home-office-car-blue-grey-slfc460300/" target="_blank"><svg viewBox="0 0 24 24"><path d="M19 19H5V5h7V3H5a2 2 0 00-2 2v14a2 2 0 002 2h14a2 2 0 002-2v-7h-2v7zM14 3v2h3.59l-9.83 9.83 1.41 1.41L19 6.41V10h2V3h-7z"/></svg>See where it was purchased</a>
+            </div>
+            <div class="item-right">
+                <div class="item-price"><span class="label">I paid</span>$45</div>
+                <a class="btn-offer" href="https://wa.me/61483313425?text=Hi%2C%20I%27d%20like%20to%20make%20an%20offer%20for%20the%20*Stelive%20Memory%20Foam%20Seat%20Cushion*%20(listed%20at%20%2445).%0AMy%20offer%3A%20%24" target="_blank">
+                    <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.625.846 5.059 2.284 7.034L.789 23.492a.5.5 0 00.612.638l4.695-1.27A11.94 11.94 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 22c-2.204 0-4.244-.7-5.912-1.892l-.348-.248-3.12.844.724-3.225-.258-.384A9.953 9.953 0 012 12C2 6.486 6.486 2 12 2s10 4.486 10 10-4.486 10-10 10z"/></svg>
+                    Make an Offer
+                </a>
+            </div>
+        </div>
+
+        <div class="item">
+            <div class="item-info">
+                <div class="item-name">Stelive Ergonomic Back Cushion Lumbar Support Memory Foam</div>
+                <div class="item-meta">Back Cushion &bull; Lumbar Support &bull; Bought Oct 2025</div>
+                <a class="view-product" href="https://www.kogan.com/au/buy/topex-stelive-ergonomic-back-cushion-lumbar-support-cushion-memory-foam-back-support-pillow-slsc450301/" target="_blank"><svg viewBox="0 0 24 24"><path d="M19 19H5V5h7V3H5a2 2 0 00-2 2v14a2 2 0 002 2h14a2 2 0 002-2v-7h-2v7zM14 3v2h3.59l-9.83 9.83 1.41 1.41L19 6.41V10h2V3h-7z"/></svg>See where it was purchased</a>
+            </div>
+            <div class="item-right">
+                <div class="item-price"><span class="label">I paid</span>$45</div>
+                <a class="btn-offer" href="https://wa.me/61483313425?text=Hi%2C%20I%27d%20like%20to%20make%20an%20offer%20for%20the%20*Stelive%20Ergonomic%20Back%20Cushion%20Lumbar%20Support*%20(listed%20at%20%2445).%0AMy%20offer%3A%20%24" target="_blank">
+                    <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.625.846 5.059 2.284 7.034L.789 23.492a.5.5 0 00.612.638l4.695-1.27A11.94 11.94 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 22c-2.204 0-4.244-.7-5.912-1.892l-.348-.248-3.12.844.724-3.225-.258-.384A9.953 9.953 0 012 12C2 6.486 6.486 2 12 2s10 4.486 10 10-4.486 10-10 10z"/></svg>
+                    Make an Offer
+                </a>
+            </div>
+        </div>
+
+        <div class="item">
+            <div class="item-info">
+                <div class="item-name">Livemor 8 Nodes Full Back Massage Cushion Heating Massage Seat</div>
+                <div class="item-meta">Massage Cushion &bull; Heated &bull; Bought Oct 2025</div>
+                <a class="view-product" href="https://www.kogan.com/au/buy/nai-livemor-8-nodes-full-back-massage-cushion-heating-massage-seats-massage-seat-baron-bk/" target="_blank"><svg viewBox="0 0 24 24"><path d="M19 19H5V5h7V3H5a2 2 0 00-2 2v14a2 2 0 002 2h14a2 2 0 002-2v-7h-2v7zM14 3v2h3.59l-9.83 9.83 1.41 1.41L19 6.41V10h2V3h-7z"/></svg>See where it was purchased</a>
+            </div>
+            <div class="item-right">
+                <div class="item-price"><span class="label">I paid</span>$87</div>
+                <a class="btn-offer" href="https://wa.me/61483313425?text=Hi%2C%20I%27d%20like%20to%20make%20an%20offer%20for%20the%20*Livemor%20Massage%20Cushion%20Heated*%20(listed%20at%20%2487).%0AMy%20offer%3A%20%24" target="_blank">
+                    <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.625.846 5.059 2.284 7.034L.789 23.492a.5.5 0 00.612.638l4.695-1.27A11.94 11.94 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 22c-2.204 0-4.244-.7-5.912-1.892l-.348-.248-3.12.844.724-3.225-.258-.384A9.953 9.953 0 012 12C2 6.486 6.486 2 12 2s10 4.486 10 10-4.486 10-10 10z"/></svg>
+                    Make an Offer
+                </a>
+            </div>
+        </div>
+
+        <div class="category-title cat-appliances">Appliances</div>
+
+        <div class="item">
+            <div class="item-info">
+                <div class="item-name">Kogan 197L Top Mount Fridge Stainless Steel</div>
+                <div class="item-meta">Fridge &bull; 197L &bull; Stainless Steel &bull; Bought Oct 2025</div>
+                <a class="view-product" href="https://www.kogan.com/au/buy/kogan-197l-top-mount-fridge-stainless-steel/" target="_blank"><svg viewBox="0 0 24 24"><path d="M19 19H5V5h7V3H5a2 2 0 00-2 2v14a2 2 0 002 2h14a2 2 0 002-2v-7h-2v7zM14 3v2h3.59l-9.83 9.83 1.41 1.41L19 6.41V10h2V3h-7z"/></svg>See where it was purchased</a>
+            </div>
+            <div class="item-right">
+                <div class="item-price"><span class="label">I paid</span>$349</div>
+                <a class="btn-offer" href="https://wa.me/61483313425?text=Hi%2C%20I%27d%20like%20to%20make%20an%20offer%20for%20the%20*Kogan%20197L%20Top%20Mount%20Fridge*%20(listed%20at%20%24349).%0AMy%20offer%3A%20%24" target="_blank">
+                    <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.625.846 5.059 2.284 7.034L.789 23.492a.5.5 0 00.612.638l4.695-1.27A11.94 11.94 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 22c-2.204 0-4.244-.7-5.912-1.892l-.348-.248-3.12.844.724-3.225-.258-.384A9.953 9.953 0 012 12C2 6.486 6.486 2 12 2s10 4.486 10 10-4.486 10-10 10z"/></svg>
+                    Make an Offer
+                </a>
+            </div>
+        </div>
+
+        <div class="item">
+            <div class="item-info">
+                <div class="item-name">Kogan 7.5kg Front Load BLDC Inverter Washing Machine Graphite</div>
+                <div class="item-meta">Washing Machine &bull; 7.5kg &bull; Front Load &bull; Bought Oct 2025</div>
+                <a class="view-product" href="https://www.kogan.com/au/buy/kogan-75kg-front-load-bldc-inverter-washing-machine-graphite-kogan-kogan/" target="_blank"><svg viewBox="0 0 24 24"><path d="M19 19H5V5h7V3H5a2 2 0 00-2 2v14a2 2 0 002 2h14a2 2 0 002-2v-7h-2v7zM14 3v2h3.59l-9.83 9.83 1.41 1.41L19 6.41V10h2V3h-7z"/></svg>See where it was purchased</a>
+            </div>
+            <div class="item-right">
+                <div class="item-price"><span class="label">I paid</span>$429</div>
+                <a class="btn-offer" href="https://wa.me/61483313425?text=Hi%2C%20I%27d%20like%20to%20make%20an%20offer%20for%20the%20*Kogan%207.5kg%20Washing%20Machine*%20(listed%20at%20%24429).%0AMy%20offer%3A%20%24" target="_blank">
+                    <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.625.846 5.059 2.284 7.034L.789 23.492a.5.5 0 00.612.638l4.695-1.27A11.94 11.94 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 22c-2.204 0-4.244-.7-5.912-1.892l-.348-.248-3.12.844.724-3.225-.258-.384A9.953 9.953 0 012 12C2 6.486 6.486 2 12 2s10 4.486 10 10-4.486 10-10 10z"/></svg>
+                    Make an Offer
+                </a>
+            </div>
+        </div>
+
+        <div class="item">
+            <div class="item-info">
+                <div class="item-name">Kogan 7kg Vented Dryer White</div>
+                <div class="item-meta">Dryer &bull; 7kg &bull; Vented &bull; Bought Oct 2025</div>
+                <a class="view-product" href="https://www.kogan.com/au/buy/kogan-7kg-vented-dryer-white-kogan/" target="_blank"><svg viewBox="0 0 24 24"><path d="M19 19H5V5h7V3H5a2 2 0 00-2 2v14a2 2 0 002 2h14a2 2 0 002-2v-7h-2v7zM14 3v2h3.59l-9.83 9.83 1.41 1.41L19 6.41V10h2V3h-7z"/></svg>See where it was purchased</a>
+            </div>
+            <div class="item-right">
+                <div class="item-price"><span class="label">I paid</span>$349</div>
+                <a class="btn-offer" href="https://wa.me/61483313425?text=Hi%2C%20I%27d%20like%20to%20make%20an%20offer%20for%20the%20*Kogan%207kg%20Vented%20Dryer*%20(listed%20at%20%24349).%0AMy%20offer%3A%20%24" target="_blank">
+                    <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.625.846 5.059 2.284 7.034L.789 23.492a.5.5 0 00.612.638l4.695-1.27A11.94 11.94 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 22c-2.204 0-4.244-.7-5.912-1.892l-.348-.248-3.12.844.724-3.225-.258-.384A9.953 9.953 0 012 12C2 6.486 6.486 2 12 2s10 4.486 10 10-4.486 10-10 10z"/></svg>
+                    Make an Offer
+                </a>
+            </div>
+        </div>
+
+        <div class="item">
+            <div class="item-info">
+                <div class="item-name">Philips Aquaporin Mineral Water Station (Hot Water &amp; Boiling Dispenser)</div>
+                <div class="item-meta">Hot Water &amp; Boiling Dispenser &bull; Water Filtration &bull; Bought Dec 2025</div>
+                <a class="view-product" href="https://www.jbhifi.com.au/products/philips-aquaporin-mineral-water-station" target="_blank"><svg viewBox="0 0 24 24"><path d="M19 19H5V5h7V3H5a2 2 0 00-2 2v14a2 2 0 002 2h14a2 2 0 002-2v-7h-2v7zM14 3v2h3.59l-9.83 9.83 1.41 1.41L19 6.41V10h2V3h-7z"/></svg>See where it was purchased</a>
+            </div>
+            <div class="item-right">
+                <div class="item-price"><span class="label">I paid</span>$999</div>
+                <a class="btn-offer" href="https://wa.me/61483313425?text=Hi%2C%20I%27d%20like%20to%20make%20an%20offer%20for%20the%20*Philips%20Aquaporin%20Mineral%20Water%20Station*%20(listed%20at%20%24999).%0AMy%20offer%3A%20%24" target="_blank">
+                    <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.625.846 5.059 2.284 7.034L.789 23.492a.5.5 0 00.612.638l4.695-1.27A11.94 11.94 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 22c-2.204 0-4.244-.7-5.912-1.892l-.348-.248-3.12.844.724-3.225-.258-.384A9.953 9.953 0 012 12C2 6.486 6.486 2 12 2s10 4.486 10 10-4.486 10-10 10z"/></svg>
+                    Make an Offer
+                </a>
+            </div>
+        </div>
+
+        <div class="item">
+            <div class="item-info">
+                <div class="item-name">Russell Hobbs Honeycomb Microwave White</div>
+                <div class="item-meta">Microwave &bull; White &bull; Bought Oct 2025</div>
+                <a class="view-product" href="https://www.harrisscarfe.com.au/electrical/kitchen-appliances/microwaves-ovens/russell-hobbs-honeycomb-microwave/BP669054001-white" target="_blank"><svg viewBox="0 0 24 24"><path d="M19 19H5V5h7V3H5a2 2 0 00-2 2v14a2 2 0 002 2h14a2 2 0 002-2v-7h-2v7zM14 3v2h3.59l-9.83 9.83 1.41 1.41L19 6.41V10h2V3h-7z"/></svg>See where it was purchased</a>
+            </div>
+            <div class="item-right">
+                <div class="item-price"><span class="label">I paid</span>$130</div>
+                <a class="btn-offer" href="https://wa.me/61483313425?text=Hi%2C%20I%27d%20like%20to%20make%20an%20offer%20for%20the%20*Russell%20Hobbs%20Honeycomb%20Microwave%20White*%20(listed%20at%20%24130).%0AMy%20offer%3A%20%24" target="_blank">
+                    <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.625.846 5.059 2.284 7.034L.789 23.492a.5.5 0 00.612.638l4.695-1.27A11.94 11.94 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 22c-2.204 0-4.244-.7-5.912-1.892l-.348-.248-3.12.844.724-3.225-.258-.384A9.953 9.953 0 012 12C2 6.486 6.486 2 12 2s10 4.486 10 10-4.486 10-10 10z"/></svg>
+                    Make an Offer
+                </a>
+            </div>
+        </div>
+
+        <div class="category-title cat-kitchen">Kitchen</div>
+
+        <div class="item">
+            <div class="item-info">
+                <div class="item-name">KICHLY Pre-Seasoned Cast Iron Skillet 10.25 inches Black</div>
+                <div class="item-meta">Cast Iron Skillet &bull; 10.25" &bull; Bought Oct 2025</div>
+                <a class="view-product" href="https://www.amazon.com.au/dp/B07V3F2T1M?ref=ppx_yo2ov_dt_b_fed_asin_title&th=1" target="_blank"><svg viewBox="0 0 24 24"><path d="M19 19H5V5h7V3H5a2 2 0 00-2 2v14a2 2 0 002 2h14a2 2 0 002-2v-7h-2v7zM14 3v2h3.59l-9.83 9.83 1.41 1.41L19 6.41V10h2V3h-7z"/></svg>See where it was purchased</a>
+            </div>
+            <div class="item-right">
+                <div class="item-price"><span class="label">I paid</span>$19</div>
+                <a class="btn-offer" href="https://wa.me/61483313425?text=Hi%2C%20I%27d%20like%20to%20make%20an%20offer%20for%20the%20*KICHLY%20Cast%20Iron%20Skillet%2010.25%22*%20(listed%20at%20%2419).%0AMy%20offer%3A%20%24" target="_blank">
+                    <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.625.846 5.059 2.284 7.034L.789 23.492a.5.5 0 00.612.638l4.695-1.27A11.94 11.94 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 22c-2.204 0-4.244-.7-5.912-1.892l-.348-.248-3.12.844.724-3.225-.258-.384A9.953 9.953 0 012 12C2 6.486 6.486 2 12 2s10 4.486 10 10-4.486 10-10 10z"/></svg>
+                    Make an Offer
+                </a>
+            </div>
+        </div>
+
+        <div class="category-title cat-bedroom">Bedroom &amp; Furniture</div>
+
+        <div class="item">
+            <div class="item-info">
+                <div class="item-name">Advwin Bed Frame Queen Size - Upholstered Platform Fabric Grey</div>
+                <div class="item-meta">Bed Frame &bull; Queen Size &bull; Bought Oct 2025</div>
+                <a class="view-product" href="https://www.kogan.com/au/shop/category/home-garden-3804/beds-mattresses-beds-bed-frames-40417/" target="_blank"><svg viewBox="0 0 24 24"><path d="M19 19H5V5h7V3H5a2 2 0 00-2 2v14a2 2 0 002 2h14a2 2 0 002-2v-7h-2v7zM14 3v2h3.59l-9.83 9.83 1.41 1.41L19 6.41V10h2V3h-7z"/></svg>See where it was purchased</a>
+            </div>
+            <div class="item-right">
+                <div class="item-price"><span class="label">I paid</span>$116</div>
+                <a class="btn-offer" href="https://wa.me/61483313425?text=Hi%2C%20I%27d%20like%20to%20make%20an%20offer%20for%20the%20*Advwin%20Bed%20Frame%20Queen%20(Fabric%20Grey)*%20(listed%20at%20%24116).%0AMy%20offer%3A%20%24" target="_blank">
+                    <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.625.846 5.059 2.284 7.034L.789 23.492a.5.5 0 00.612.638l4.695-1.27A11.94 11.94 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 22c-2.204 0-4.244-.7-5.912-1.892l-.348-.248-3.12.844.724-3.225-.258-.384A9.953 9.953 0 012 12C2 6.486 6.486 2 12 2s10 4.486 10 10-4.486 10-10 10z"/></svg>
+                    Make an Offer
+                </a>
+            </div>
+        </div>
+
+        <div class="item">
+            <div class="item-info">
+                <div class="item-name">Advwin Bed Frame Queen Size - Upholstered Platform Grey</div>
+                <div class="item-meta">Bed Frame &bull; Queen Size &bull; Bought Oct 2025</div>
+                <a class="view-product" href="https://www.kogan.com/au/shop/category/home-garden-3804/beds-mattresses-beds-bed-frames-40417/" target="_blank"><svg viewBox="0 0 24 24"><path d="M19 19H5V5h7V3H5a2 2 0 00-2 2v14a2 2 0 002 2h14a2 2 0 002-2v-7h-2v7zM14 3v2h3.59l-9.83 9.83 1.41 1.41L19 6.41V10h2V3h-7z"/></svg>See where it was purchased</a>
+            </div>
+            <div class="item-right">
+                <div class="item-price"><span class="label">I paid</span>$126</div>
+                <a class="btn-offer" href="https://wa.me/61483313425?text=Hi%2C%20I%27d%20like%20to%20make%20an%20offer%20for%20the%20*Advwin%20Bed%20Frame%20Queen%20(Platform%20Grey)*%20(listed%20at%20%24126).%0AMy%20offer%3A%20%24" target="_blank">
+                    <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.625.846 5.059 2.284 7.034L.789 23.492a.5.5 0 00.612.638l4.695-1.27A11.94 11.94 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 22c-2.204 0-4.244-.7-5.912-1.892l-.348-.248-3.12.844.724-3.225-.258-.384A9.953 9.953 0 012 12C2 6.486 6.486 2 12 2s10 4.486 10 10-4.486 10-10 10z"/></svg>
+                    Make an Offer
+                </a>
+            </div>
+        </div>
+
+        <div class="item">
+            <div class="item-info">
+                <div class="item-name">Advwin Mattress Queen Medium Firm Pocket Spring 30cm Grey</div>
+                <div class="item-meta">Mattress &bull; Queen Size &bull; Bought Oct 2025 &bull; <span class="units-badge">2 available</span></div>
+                <a class="view-product" href="https://www.kogan.com/au/buy/advwin-advwin-mattress-queen-medium-firm-bed-top-pocket-spring-30cm-130305600/" target="_blank"><svg viewBox="0 0 24 24"><path d="M19 19H5V5h7V3H5a2 2 0 00-2 2v14a2 2 0 002 2h14a2 2 0 002-2v-7h-2v7zM14 3v2h3.59l-9.83 9.83 1.41 1.41L19 6.41V10h2V3h-7z"/></svg>See where it was purchased</a>
+            </div>
+            <div class="item-right">
+                <div class="item-price"><span class="label">I paid (each)</span>$180</div>
+                <a class="btn-offer" href="https://wa.me/61483313425?text=Hi%2C%20I%27d%20like%20to%20make%20an%20offer%20for%20the%20*Advwin%20Mattress%20Queen%20Pocket%20Spring*%20(listed%20at%20%24180%20each%2C%202%20available).%0AMy%20offer%3A%20%24" target="_blank">
+                    <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.625.846 5.059 2.284 7.034L.789 23.492a.5.5 0 00.612.638l4.695-1.27A11.94 11.94 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 22c-2.204 0-4.244-.7-5.912-1.892l-.348-.248-3.12.844.724-3.225-.258-.384A9.953 9.953 0 012 12C2 6.486 6.486 2 12 2s10 4.486 10 10-4.486 10-10 10z"/></svg>
+                    Make an Offer
+                </a>
+            </div>
+        </div>
+
+        <div class="item">
+            <div class="item-info">
+                <div class="item-name">Idyll 3 Seater Sofa Bed</div>
+                <div class="item-meta">Sofa Bed &bull; 3 Seater &bull; Bought Oct 2025</div>
+                <a class="view-product" href="https://www.templeandwebster.com.au/Idyll-3-Seater-Sofa-Bed-LEVE3496.html" target="_blank"><svg viewBox="0 0 24 24"><path d="M19 19H5V5h7V3H5a2 2 0 00-2 2v14a2 2 0 002 2h14a2 2 0 002-2v-7h-2v7zM14 3v2h3.59l-9.83 9.83 1.41 1.41L19 6.41V10h2V3h-7z"/></svg>See where it was purchased</a>
+            </div>
+            <div class="item-right">
+                <div class="item-price"><span class="label">I paid</span>$380</div>
+                <a class="btn-offer" href="https://wa.me/61483313425?text=Hi%2C%20I%27d%20like%20to%20make%20an%20offer%20for%20the%20*Idyll%203%20Seater%20Sofa%20Bed*%20(listed%20at%20%24380).%0AMy%20offer%3A%20%24" target="_blank">
+                    <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.625.846 5.059 2.284 7.034L.789 23.492a.5.5 0 00.612.638l4.695-1.27A11.94 11.94 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 22c-2.204 0-4.244-.7-5.912-1.892l-.348-.248-3.12.844.724-3.225-.258-.384A9.953 9.953 0 012 12C2 6.486 6.486 2 12 2s10 4.486 10 10-4.486 10-10 10z"/></svg>
+                    Make an Offer
+                </a>
+            </div>
+        </div>
+
+        <div class="item">
+            <div class="item-info">
+                <div class="item-name">Giantex 4-Piece Dining Table &amp; Chair Set with 2 Chairs &amp; 1 Bench Grey</div>
+                <div class="item-meta">Dining Set &bull; 4 Pieces &bull; Bought Oct 2025</div>
+                <a class="view-product" href="https://www.amazon.com.au/dp/B0CNGWBLWK?ref=ppx_yo2ov_dt_b_fed_asin_title&th=1" target="_blank"><svg viewBox="0 0 24 24"><path d="M19 19H5V5h7V3H5a2 2 0 00-2 2v14a2 2 0 002 2h14a2 2 0 002-2v-7h-2v7zM14 3v2h3.59l-9.83 9.83 1.41 1.41L19 6.41V10h2V3h-7z"/></svg>See where it was purchased</a>
+            </div>
+            <div class="item-right">
+                <div class="item-price"><span class="label">I paid</span>$180</div>
+                <a class="btn-offer" href="https://wa.me/61483313425?text=Hi%2C%20I%27d%20like%20to%20make%20an%20offer%20for%20the%20*Giantex%204-Piece%20Dining%20Table%20%26%20Chair%20Set*%20(listed%20at%20%24180).%0AMy%20offer%3A%20%24" target="_blank">
+                    <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.625.846 5.059 2.284 7.034L.789 23.492a.5.5 0 00.612.638l4.695-1.27A11.94 11.94 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 22c-2.204 0-4.244-.7-5.912-1.892l-.348-.248-3.12.844.724-3.225-.258-.384A9.953 9.953 0 012 12C2 6.486 6.486 2 12 2s10 4.486 10 10-4.486 10-10 10z"/></svg>
+                    Make an Offer
+                </a>
+            </div>
+        </div>
+
+        <div class="item">
+            <div class="item-info">
+                <div class="item-name">Artiss TV Unit Cabinet Entertainment Units 120cm 2 Drawer White</div>
+                <div class="item-meta">TV Unit &bull; 120cm &bull; White &bull; Bought Oct 2025</div>
+                <a class="view-product" href="https://www.amazon.com.au/dp/B07VGPMJ11?ref=ppx_yo2ov_dt_b_fed_asin_title" target="_blank"><svg viewBox="0 0 24 24"><path d="M19 19H5V5h7V3H5a2 2 0 00-2 2v14a2 2 0 002 2h14a2 2 0 002-2v-7h-2v7zM14 3v2h3.59l-9.83 9.83 1.41 1.41L19 6.41V10h2V3h-7z"/></svg>See where it was purchased</a>
+            </div>
+            <div class="item-right">
+                <div class="item-price"><span class="label">I paid</span>$90</div>
+                <a class="btn-offer" href="https://wa.me/61483313425?text=Hi%2C%20I%27d%20like%20to%20make%20an%20offer%20for%20the%20*Artiss%20TV%20Unit%20Cabinet%20120cm%20White*%20(listed%20at%20%2490).%0AMy%20offer%3A%20%24" target="_blank">
+                    <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.625.846 5.059 2.284 7.034L.789 23.492a.5.5 0 00.612.638l4.695-1.27A11.94 11.94 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 22c-2.204 0-4.244-.7-5.912-1.892l-.348-.248-3.12.844.724-3.225-.258-.384A9.953 9.953 0 012 12C2 6.486 6.486 2 12 2s10 4.486 10 10-4.486 10-10 10z"/></svg>
+                    Make an Offer
+                </a>
+            </div>
+        </div>
+
+        <div class="category-title cat-auto">Automotive &amp; Tools</div>
+
+        <div class="item">
+            <div class="item-info">
+                <div class="item-name">REDTIGER 4K Dash Cam Front Rear STARVIS 2 Sensor 128GB WiFi GPS (F7NP)</div>
+                <div class="item-meta">Dash Cam &bull; 4K &bull; Front + Rear &bull; Bought Nov 2025</div>
+                <a class="view-product" href="https://www.amazon.com.au/dp/B098WVKF19?ref=ppx_yo2ov_dt_b_fed_asin_title&th=1" target="_blank"><svg viewBox="0 0 24 24"><path d="M19 19H5V5h7V3H5a2 2 0 00-2 2v14a2 2 0 002 2h14a2 2 0 002-2v-7h-2v7zM14 3v2h3.59l-9.83 9.83 1.41 1.41L19 6.41V10h2V3h-7z"/></svg>See where it was purchased</a>
+            </div>
+            <div class="item-right">
+                <div class="item-price"><span class="label">I paid</span>$210</div>
+                <a class="btn-offer" href="https://wa.me/61483313425?text=Hi%2C%20I%27d%20like%20to%20make%20an%20offer%20for%20the%20*REDTIGER%204K%20Dash%20Cam%20Front%20Rear*%20(listed%20at%20%24210).%0AMy%20offer%3A%20%24" target="_blank">
+                    <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.625.846 5.059 2.284 7.034L.789 23.492a.5.5 0 00.612.638l4.695-1.27A11.94 11.94 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 22c-2.204 0-4.244-.7-5.912-1.892l-.348-.248-3.12.844.724-3.225-.258-.384A9.953 9.953 0 012 12C2 6.486 6.486 2 12 2s10 4.486 10 10-4.486 10-10 10z"/></svg>
+                    Make an Offer
+                </a>
+            </div>
+        </div>
+
+        <div class="item">
+            <div class="item-info">
+                <div class="item-name">REDTIGER Dash Cam Hardwire Kit USB-C with Voltage Indicator</div>
+                <div class="item-meta">Dash Cam Accessory &bull; Hardwire Kit &bull; Bought Nov 2025</div>
+                <a class="view-product" href="https://www.amazon.com.au/dp/B09WCTZ3Y8?ref=ppx_yo2ov_dt_b_fed_asin_title&th=1" target="_blank"><svg viewBox="0 0 24 24"><path d="M19 19H5V5h7V3H5a2 2 0 00-2 2v14a2 2 0 002 2h14a2 2 0 002-2v-7h-2v7zM14 3v2h3.59l-9.83 9.83 1.41 1.41L19 6.41V10h2V3h-7z"/></svg>See where it was purchased</a>
+            </div>
+            <div class="item-right">
+                <div class="item-price"><span class="label">I paid</span>$40</div>
+                <a class="btn-offer" href="https://wa.me/61483313425?text=Hi%2C%20I%27d%20like%20to%20make%20an%20offer%20for%20the%20*REDTIGER%20Dash%20Cam%20Hardwire%20Kit%20USB-C*%20(listed%20at%20%2440).%0AMy%20offer%3A%20%24" target="_blank">
+                    <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.625.846 5.059 2.284 7.034L.789 23.492a.5.5 0 00.612.638l4.695-1.27A11.94 11.94 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 22c-2.204 0-4.244-.7-5.912-1.892l-.348-.248-3.12.844.724-3.225-.258-.384A9.953 9.953 0 012 12C2 6.486 6.486 2 12 2s10 4.486 10 10-4.486 10-10 10z"/></svg>
+                    Make an Offer
+                </a>
+            </div>
+        </div>
+
+        <div class="item">
+            <div class="item-info">
+                <div class="item-name">Mechanic Tool Kit 174 Pieces - Spanners, Sockets, Pliers &amp; More</div>
+                <div class="item-meta">Tool Kit &bull; 174 Pieces &bull; with Storage Bag &bull; Bought Jan 2023</div>
+                <a class="view-product" href="https://www.4wdsupacentre.com.au/complete-bush-mechanic-toolkit-174-pieces-spanners-sockets-pliers-more-inc-spares-storage-bag-adventure-kings.html" target="_blank"><svg viewBox="0 0 24 24"><path d="M19 19H5V5h7V3H5a2 2 0 00-2 2v14a2 2 0 002 2h14a2 2 0 002-2v-7h-2v7zM14 3v2h3.59l-9.83 9.83 1.41 1.41L19 6.41V10h2V3h-7z"/></svg>See where it was purchased</a>
+            </div>
+            <div class="item-right">
+                <div class="item-price"><span class="label">I paid</span>$169</div>
+                <a class="btn-offer" href="https://wa.me/61483313425?text=Hi%2C%20I%27d%20like%20to%20make%20an%20offer%20for%20the%20*174pc%20Mechanic%20Tool%20Kit*%20(listed%20at%20%24169).%0AMy%20offer%3A%20%24" target="_blank">
+                    <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.625.846 5.059 2.284 7.034L.789 23.492a.5.5 0 00.612.638l4.695-1.27A11.94 11.94 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 22c-2.204 0-4.244-.7-5.912-1.892l-.348-.248-3.12.844.724-3.225-.258-.384A9.953 9.953 0 012 12C2 6.486 6.486 2 12 2s10 4.486 10 10-4.486 10-10 10z"/></svg>
+                    Make an Offer
+                </a>
+            </div>
+        </div>
+
+        <div class="item">
+            <div class="item-info">
+                <div class="item-name">2023 Ford Everest 4WD</div>
+                <div class="item-meta">Vehicle &bull; 4WD &bull; 2023</div>
+            </div>
+            <div class="item-right">
+                <div class="item-price"><span class="label">Asking</span>$50,000</div>
+                <a class="btn-offer" href="https://wa.me/61483313425?text=Hi%2C%20I%27d%20like%20to%20make%20an%20offer%20for%20the%20*2023%20Ford%20Everest%204WD*%20(listed%20at%20%2450%2C000).%0AMy%20offer%3A%20%24" target="_blank">
+                    <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.625.846 5.059 2.284 7.034L.789 23.492a.5.5 0 00.612.638l4.695-1.27A11.94 11.94 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 22c-2.204 0-4.244-.7-5.912-1.892l-.348-.248-3.12.844.724-3.225-.258-.384A9.953 9.953 0 012 12C2 6.486 6.486 2 12 2s10 4.486 10 10-4.486 10-10 10z"/></svg>
+                    Make an Offer
+                </a>
+            </div>
+        </div>
+
+        <div class="item">
+            <div class="item-info">
+                <div class="item-name">Motorcycle Helmets - Dirt and Road (7 helmets)</div>
+                <div class="item-meta">Helmets &bull; Mixed &bull; 5 bought 2024, 2 bought 2025 &bull; <span class="units-badge">7 available</span></div>
+            </div>
+            <div class="item-right">
+                <div class="item-price"><span class="label">Price</span>Make offer</div>
+                <a class="btn-offer" href="https://wa.me/61483313425?text=Hi%2C%20I%27d%20like%20to%20make%20an%20offer%20for%20the%20*Motorcycle%20Helmets%20(7%20nos)*%0AMy%20offer%3A%20%24" target="_blank">
+                    <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.625.846 5.059 2.284 7.034L.789 23.492a.5.5 0 00.612.638l4.695-1.27A11.94 11.94 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 22c-2.204 0-4.244-.7-5.912-1.892l-.348-.248-3.12.844.724-3.225-.258-.384A9.953 9.953 0 012 12C2 6.486 6.486 2 12 2s10 4.486 10 10-4.486 10-10 10z"/></svg>
+                    Make an Offer
+                </a>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="footer">
+        <p>Give your best offer &mdash; all items must go before March 23!</p>
+        <p>WhatsApp your offer to <strong>0483 313 425</strong> &bull; Heidelberg West, Victoria</p>
+    </div>
+
+    <div class="admin-bar" id="adminBar">
+        <span class="admin-label">Admin</span>
+        Toggle items as Sold, then click
+        <button class="btn-copy-link" id="saveBtn">Download Updated Page</button>
+    </div>
+    <div class="copy-toast" id="toast">Updated file downloaded! Re-upload it to your host.</div>
+
+    <script>
+    const params = new URLSearchParams(window.location.search);
+    const items = document.querySelectorAll('.item');
+    const isAdmin = params.get('admin') === 'arun2025';
+
+    if (isAdmin) {
+        document.getElementById('adminBar').classList.add('active');
+
+        items.forEach((item) => {
+            const isSold = item.classList.contains('sold');
+            const btn = document.createElement('button');
+            btn.className = 'btn-sold-toggle';
+            btn.textContent = isSold ? 'Undo Sold' : 'Mark Sold';
+            btn.addEventListener('click', () => {
+                item.classList.toggle('sold');
+                btn.textContent = item.classList.contains('sold') ? 'Undo Sold' : 'Mark Sold';
+            });
+            item.querySelector('.item-right').appendChild(btn);
+        });
+
+        document.getElementById('saveBtn').addEventListener('click', () => {
+            // Remove admin buttons before saving
+            const clone = document.documentElement.cloneNode(true);
+            clone.querySelectorAll('.btn-sold-toggle').forEach(b => b.remove());
+            clone.querySelector('#adminBar').classList.remove('active');
+            const html = '<!DOCTYPE html>\n' + clone.outerHTML;
+            const blob = new Blob([html], { type: 'text/html' });
+            const a = document.createElement('a');
+            a.href = URL.createObjectURL(blob);
+            a.download = 'index.html';
+            a.click();
+            URL.revokeObjectURL(a.href);
+            const toast = document.getElementById('toast');
+            toast.style.display = 'block';
+            setTimeout(() => { toast.style.display = 'none'; }, 3000);
+        });
+    }
+
+    // Scroll animations
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach((entry, i) => {
+            if (entry.isIntersecting) {
+                setTimeout(() => {
+                    entry.target.classList.add('visible');
+                }, entry.target.classList.contains('category-title') ? 0 : i * 80);
+                observer.unobserve(entry.target);
+            }
+        });
+    }, { threshold: 0.1 });
+
+    document.querySelectorAll('.item, .category-title').forEach(el => observer.observe(el));
+    </script>
+</body>
+</html>
