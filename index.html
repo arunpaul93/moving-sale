@@ -846,10 +846,17 @@
 
     document.querySelectorAll('.item, .category-title').forEach(el => observer.observe(el));
 
-    // Compact header on scroll
+    // Compact header on scroll with hysteresis to prevent flickering
     const header = document.querySelector('.header');
+    let isCompact = false;
     window.addEventListener('scroll', () => {
-        header.classList.toggle('compact', window.scrollY > 80);
+        if (!isCompact && window.scrollY > 120) {
+            isCompact = true;
+            header.classList.add('compact');
+        } else if (isCompact && window.scrollY < 40) {
+            isCompact = false;
+            header.classList.remove('compact');
+        }
     });
     </script>
 </body>
